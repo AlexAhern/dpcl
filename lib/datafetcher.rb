@@ -2,8 +2,9 @@ require 'json'
 require 'net/http'
 
 class DataFetcher
-	def fetch(data)
-	test = Net::HTTP.get(URI(data)) #=> String
-	test.strip
+	def fetch(url)
+		response = Net::HTTP.get(URI(url)) #=> String
+		response.strip
 	end
 end
+
