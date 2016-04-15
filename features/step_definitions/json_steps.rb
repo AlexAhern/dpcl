@@ -1,5 +1,6 @@
 require_relative '../../lib/datafetcher'
-require_relative '../../lib/jsonparser'
+require_relative '../../lib/dpjsonparser'
+require_relative '../../lib/redditpost'
 require 'rspec'
 
 When(/^I fetch a json file$/) do
@@ -14,8 +15,8 @@ end
 
 When(/^I fetch the new from daily programmer subreddit$/) do
 	$fetchedFromDp = DataFetcher.new.fetch("https://api.reddit.com/r/dailyprogrammer/new")
-	$newDailyProgrammer = JsonParser.new($fetchedFromDp)
-	$listOfItems = $newDailyProgrammer.getListOfNewItems()
+	$newDailyProgrammer = DPJsonParser.new($fetchedFromDp)
+	$listOfItems = $newDailyProgrammer.getListOfPostHashes()
 end
 
 Then(/^I get a list of (\d+) items$/) do |numberOfItems|
@@ -23,10 +24,12 @@ Then(/^I get a list of (\d+) items$/) do |numberOfItems|
 end
 
 When(/^I choose a post by index$/) do
-	@individualPost = $newDailyProgrammer.getPostByIndex(Random.rand(25)) 
+	@individualPost = $newDailyProgrammer.getPostAsRedditPost(Random.rand(25)) 
 end
 
-Then(/^it has a title$/) do
-	@individualPost.key?("title")
+Then(/^it has a title, a selftext, and an id$/) do
+	raise "Expected title, got no title" unless @individualPost.title.nil?() == false
+	raise "Expected selftext, got no selftext" unless @individualPost.selftext.nil?() == false
+	raise "Expected id, got no id" unless @individualPost.id.nil?() == false
 end
 

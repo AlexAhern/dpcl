@@ -10,4 +10,4 @@ Then I get a list of 25 items
 
 Scenario: Can get an individual item from the list
 When I choose a post by index 
-Then it has a title
+Then it has a title, a selftext, and an id
