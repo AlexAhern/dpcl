@@ -28,7 +28,7 @@ When(/^I choose a post by index$/) do
 end
 
 Then(/^it has a title, a selftext, and an id$/) do
-	raise "Expected title, got no title" unless @individualPost.title.nil?() == falsei
+	raise "Expected title, got no title" unless @individualPost.title.nil?() == false
 	raise "Expected selftext, got no selftext" unless @individualPost.selftext.nil?() == false
 	raise "Expected id, got no id" unless @individualPost.id.nil?() == false
 end
