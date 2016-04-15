@@ -2,14 +2,14 @@ require 'json'
 
 class DPJsonParser
 	def initialize(json)
-		@firstPage = JSON.parse(json)
+		@parsedJson = JSON.parse(json)
 	end
 	def getListOfPostHashes()
-		newItems =  @firstPage["data"]["children"]
+		postHashes =  @parsedJson["data"]["children"]
 	end
 
 	def getPostAsHash(index)
-		individualPostAsHash = @firstPage["data"]["children"][index]["data"]
+		individualPostAsHash = getListOfPostHashes()[index]["data"]
 	end
 
 	def getPostAsRedditPost(index)
