@@ -19,7 +19,8 @@ When(/^I fetch the new from daily programmer subreddit$/) do
 end
 
 Then(/^I get a list of (\d+) items$/) do |numberOfItems|
-	raise "Expected #{numberOfItems} got #{$listOfItems.length}" unless $listOfItems.length.eql?(numberOfItems.to_i)
+	#raise "Expected #{numberOfItems} got #{$listOfItems.length}" unless $listOfItems.length.eql?(numberOfItems.to_i)
+	raise "Expected #{numberOfItems} got #{$listOfItems.length}"
 end
 
 When(/^I choose a post by index$/) do

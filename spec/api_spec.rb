@@ -8,7 +8,7 @@ describe '' do
 
 		fetcher = DataFetcher.new
 		$response = fetcher.fetch(url)
-		expect($response).to be_an_instance_of(String)
+		expect($response).to be_an_instance_of(Array)
 		
 	end
 	it 'can initialize a json parser' do
