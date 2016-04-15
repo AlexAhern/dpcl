@@ -5,4 +5,5 @@ group :test do
   gem 'cucumber'
   gem 'rspec'
   gem 'webmock'
+  gem 'rake'
 end

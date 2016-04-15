@@ -1,7 +1,8 @@
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost:true)
 
-file = File.open("./testdata", "rb")
+file_path = File.expand_path("../testdata", __FILE__) 
+file = File.open(File.expand_path("./testdata", File.dirname(__FILE__)) ,"rb")
 contents = file.read
 RSpec.configure do |config|
 	config.before(:each) do
