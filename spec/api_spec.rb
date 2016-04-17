@@ -29,8 +29,7 @@ describe 'dpjsonparser' do
 		expect($parser.getPostAsHash(5)).to be_an_instance_of(Hash)	
 	end
 	it 'can list only the challenges' do
-		p $parser.getPageOfChallenges().length
-		expect($parser.getPageOfChallenges().all? {|post| post.title.include?("Challenge")})
+		expect($parser.getPageOfChallenges().all? {|post| post.title.include?("Challenge")}).to eq(true)
 	end
 	it 'can create a redditpost object from a post' do
 		individualPost = $parser.getPostAsRedditPost(5) 
