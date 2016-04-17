@@ -14,6 +14,29 @@ class DPCL < Thor
 			puts challenge.title
 		end
 	end
+	desc "show", "Displays the text of a challenge"
+	option :dif, :type => :string, :required => true, :aliases => "-d"
+	def show(number)
+		difficulty = options[:dif].capitalize
+		fetcher = DataFetcher.new
+		json = fetcher.fetch("https://api.reddit.com/r/dailyprogrammer/new")
+		parser = DPJsonParser.new(json)
+		num = "#"+number
+		foundChallenges = []
+		parser.getPageOfChallenges().each do |challenge|
+			if (/\s#{num}\s/).match(challenge.title) && challenge.title.include?("["+difficulty+"]")
+				foundChallenges.push(challenge)
+			end
+		end
+		puts "No challenge found" if foundChallenges.length == 0
+		puts foundChallenges[0].selftext if foundChallenges.length == 1
+		if foundChallenges.length > 1
+			puts "Which challenge do you want?"
+			foundChallenges.each_with_index do |challenge,index|
+			puts (index + 1).to_s + ": " + challenge.title
+			end
+		end
+	end
 end
 
 DPCL.start
