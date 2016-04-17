@@ -17,5 +17,15 @@ class DPJsonParser
 		hash = getPostAsHash(index)
 		post = RedditPost.new(hash["title"], hash["selftext"], hash["id"])
 	end
+	def getPageOfChallenges()
+		pageOfChallenges = []
+		getListOfPostHashes().each_index do |index|
+			post = getPostAsRedditPost(index)
+			if post.title.include?("Challenge")
+				pageOfChallenges.push(post)
+			end
+		end	
+		pageOfChallenges
+	end
 end
 

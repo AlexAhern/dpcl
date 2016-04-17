@@ -10,9 +10,8 @@ class DPCL < Thor
 		json = fetcher.fetch("https://api.reddit.com/r/dailyprogrammer/new")
 		parser = DPJsonParser.new(json)
 
-
-		(0..24).each do |i|
-			puts parser.getPostAsRedditPost(i).title
+		parser.getPageOfChallenges().each do |challenge|
+			puts challenge.title
 		end
 	end
 end
