@@ -1,4 +1,5 @@
 require 'json'
+require_relative './redditpost'
 
 class DPJsonParser
 	def initialize(json)

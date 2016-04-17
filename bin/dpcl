@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require 'thor'
+require_relative '../lib/dpjsonparser'
+require_relative '../lib/datafetcher'
+
+class DPCL < Thor
+	desc "new", "Shows first page of dailyprogrammer"
+	def new
+		fetcher = DataFetcher.new
+		json = fetcher.fetch("https://api.reddit.com/r/dailyprogrammer/new")
+		parser = DPJsonParser.new(json)
+
+
+		(0..24).each do |i|
+			puts parser.getPostAsRedditPost(i).title
+		end
+	end
+end
+
+DPCL.start
